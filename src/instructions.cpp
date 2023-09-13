@@ -161,16 +161,16 @@ int Instructions::getPC() const
 void Instructions::printRegister(const std::string& reg)
 {
 	if (registers.find(reg) != registers.end()) {
-        std::cout << "Value of register " << reg << ": " << registers[reg] << "\n";
-    } else {
-        throw std::runtime_error{"Register not found."};
-    }
+        	std::cout << "Value of register " << reg << ": " << registers[reg] << "\n";
+    	} else {
+        	throw std::runtime_error{"Register not found."};
+    	}
 }
 
 int Instructions::getValue(const std::string& operand) {
-    if (registers.find(operand) != registers.end()) {
-        return registers[operand];
-    } else {
-        return std::stoi(operand);
-    }
+    	if (registers.find(operand) != registers.end()) {
+        	return registers[operand];
+    	} else {
+        	return std::stoi(operand);
+    	}
 }
