@@ -2,7 +2,8 @@
 This is a simple CPU simulator written in C++. It allows you to execute a sequence of instructions using a custom assembly-like language.
 
 ## Features
-Instruction Set: The simulator supports a set of basic assembly-like instructions, including arithmetic operations, conditional jumps, and label definitions.
+
+###Instruction Set: The simulator supports a set of basic assembly-like instructions, including arithmetic operations, conditional jumps, and label definitions.
 
 ### Registers: You can work with registers (e.g., r1, r2, ..., r10) to perform arithmetic operations and comparisons.
 
@@ -35,11 +36,11 @@ g++ src/instructions.cpp src/cpu.cpp main.cpp
 ### Input Program Format
 The input program should follow the format below:
 
-mov r1 5       ; Move the value 5 into register r1
-mov r2 10      ; Move the value 10 into register r2
-add r1 r2      ; Add the values in r1 and r2 and store the result in r1
-label:         ; Label definition
-sub r1 2       ; Subtract 2 from r1
-cmp r1 r2      ; Compare r1 and r2
-jl label       ; Jump to the 'label' if r1 < r2
-print r1       ; Print the value in r1
+`mov r1 5`       ; Move the value 5 into register r1
+`mov r2 10`      ; Move the value 10 into register r2
+`add r1 r2`      ; Add the values in r1 and r2 and store the result in r1
+`label:`         ; Label definition
+`sub r1 2`       ; Subtract 2 from r1
+`cmp r1 r2`      ; Compare r1 and r2
+`jl label`       ; Jump to the 'label' if r1 < r2
+`print r1`       ; Print the value in r1
