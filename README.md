@@ -3,17 +3,17 @@ This is a simple CPU simulator written in C++. It allows you to execute a sequen
 
 ## Features
 
-### Instruction Set: The simulator supports a set of basic assembly-like instructions, including arithmetic operations, conditional jumps, and label definitions.
+- Instruction Set: The simulator supports a set of basic assembly-like instructions, including arithmetic operations, conditional jumps, and label definitions.
 
-### Registers: You can work with registers (e.g., r1, r2, ..., r10) to perform arithmetic operations and comparisons.
+- Registers: You can work with registers (e.g., r1, r2, ..., r10) to perform arithmetic operations and comparisons.
 
-### Labels: Define labels (e.g., label:) in your code to mark specific points in the program and use them for conditional jumps.
+- Labels: Define labels (e.g., label:) in your code to mark specific points in the program and use them for conditional jumps.
 
-### Conditional Jumps: Execute conditional jumps (jl, je, jle, jz, jg, jge) based on the comparison result of cmp instruction.
+- Conditional Jumps: Execute conditional jumps (jl, je, jle, jz, jg, jge) based on the comparison result of cmp instruction.
 
-### Input Programs: Load and execute programs from text files, making it easy to create and test different sequences of instructions.
+- Input Programs: Load and execute programs from text files, making it easy to create and test different sequences of instructions.
 
-### Output: The simulator provides output for each executed instruction, including register values and any detected labels.
+- Output: The simulator provides output for each executed instruction, including register values and any detected labels.
 
 ## Usage
 Clone the repository:
@@ -44,3 +44,5 @@ The input program should follow the format below:
 - `cmp r1 r2`      ; Compare r1 and r2
 - `jl label`       ; Jump to the 'label' if r1 < r2
 - `print r1`       ; Print the value in r1
+
+The program execution proceeds sequentially from one line to the next unless specific control flow instructions, such as `jl`, are encountered. These control flow instructions can alter the program's flow by jumping to different parts of the code based on certain conditions.
