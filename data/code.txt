@@ -1,0 +1,9 @@
+mov r1 5
+mov r2 4
+add r1 r2
+print r1
+label:
+sub r1 2
+cmp r1 r2
+jg label
+print r1
