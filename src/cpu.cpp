@@ -1,29 +1,36 @@
 #include "../include/cpu.h"
 
+// Constructor for the CPU class
 CPU::CPU()
-	: pc{0}
+    : pc{0}
 {
-	functions["add"] = [this](const std::string& a, const std::string& b) {instructions.add(a, b);};
-	functions["sub"] = [this](const std::string& a, const std::string& b) {instructions.subtract(a, b);};
-	functions["mul"] = [this](const std::string& a, const std::string& b) {instructions.multiply(a, b);};
-	functions["div"] = [this](const std::string& a, const std::string& b) {instructions.divide(a, b);};
-	functions["shr"] = [this](const std::string& a, const std::string& b) {instructions.shiftRight(a, b);};
-	functions["shl"] = [this](const std::string& a, const std::string& b) {instructions.shiftLeft(a, b);};
-	functions["and"] = [this](const std::string& a, const std::string& b) {instructions.logicalAnd(a, b);};
-	functions["or"] = [this](const std::string& a, const std::string& b) {instructions.logicalOr(a, b);};
-	functions["xor"] = [this](const std::string& a, const std::string& b) {instructions.logicalXor(a, b);};
-	functions["mov"] = [this](const std::string& a, const std::string& b) {instructions.mov(a, b);};
-	functions["print"] = [this](const std::string& a, const std::string& b) {instructions.printRegister(a);};
-	functions["cmp"] = [this](const std::string& a, const std::string& b) {instructions.cmp(a, b);};
-	functions2["jmp"] = [this](int a) {return instructions.jmp(a);};
-	functions2["jl"] = [this](int a) {return instructions.jl(a);};
-	functions2["je"] = [this](int a) {return instructions.je(a);};
-	functions2["jle"] = [this](int a) {return instructions.jle(a);};
-	functions2["jz"] = [this](int a) {return instructions.jz(a);};
-	functions2["jg"] = [this](int a) {return instructions.jg(a);};
-	functions2["jge"] = [this](int a) {return instructions.jge(a);};
+    // Initialize functions map for arithmetic and logical instructions
+    functions["add"] = [this](const std::string& a, const std::string& b) {instructions.add(a, b);};
+    functions["sub"] = [this](const std::string& a, const std::string& b) {instructions.subtract(a, b);};
+    functions["mul"] = [this](const std::string& a, const std::string& b) {instructions.multiply(a, b);};
+    functions["div"] = [this](const std::string& a, const std::string& b) {instructions.divide(a, b);};
+    functions["shr"] = [this](const std::string& a, const std::string& b) {instructions.shiftRight(a, b);};
+    functions["shl"] = [this](const std::string& a, const std::string& b) {instructions.shiftLeft(a, b);};
+    functions["and"] = [this](const std::string& a, const std::string& b) {instructions.logicalAnd(a, b);};
+    functions["or"] = [this](const std::string& a, const std::string& b) {instructions.logicalOr(a, b);};
+    functions["xor"] = [this](const std::string& a, const std::string& b) {instructions.logicalXor(a, b);};
+    functions["mov"] = [this](const std::string& a, const std::string& b) {instructions.mov(a, b);};
+    functions["print"] = [this](const std::string& a, const std::string& b) {instructions.printRegister(a);};
+    functions["inc"] = [this](const std::string& a, const std::string& b) {instructions.increment(a);};
+    functions["dec"] = [this](const std::string& a, const std::string& b) {instructions.decrement(a);};
+    functions["cmp"] = [this](const std::string& a, const std::string& b) {instructions.cmp(a, b);};
+    
+    // Initialize functions2 map for jump instructions
+    functions2["jmp"] = [this](int a) {return instructions.jmp(a);};
+    functions2["jl"] = [this](int a) {return instructions.jl(a);};
+    functions2["je"] = [this](int a) {return instructions.je(a);};
+    functions2["jle"] = [this](int a) {return instructions.jle(a);};
+    functions2["jz"] = [this](int a) {return instructions.jz(a);};
+    functions2["jg"] = [this](int a) {return instructions.jg(a);};
+    functions2["jge"] = [this](int a) {return instructions.jge(a);};
 }
 
+// Function to trim leading and trailing spaces from a string
 std::string CPU::trim(const std::string& str) {
     size_t first = str.find_first_not_of(' ');
     size_t last = str.find_last_not_of(' ');
@@ -33,6 +40,7 @@ std::string CPU::trim(const std::string& str) {
     return str.substr(first, (last - first + 1));
 }
 
+// Function to print the contents of the labels map
 void CPU::printLabels()
 {
     std::cout << "Labels Map Contents:\n";
@@ -42,6 +50,7 @@ void CPU::printLabels()
     }
 }
 
+// Function to read and fetch instructions from a file
 void CPU::fetch(const std::string& fileName)
 {
     std::ifstream file(fileName);
@@ -58,6 +67,7 @@ void CPU::fetch(const std::string& fileName)
     }
 }
 
+// Function to execute the fetched instructions
 void CPU::execute()
 {
     int pc = 0; 
@@ -70,11 +80,15 @@ void CPU::execute()
             std::istringstream iss(instruction);
             std::string op;
             iss >> op;
+            
+            // Check if the instruction is a label
             if (op.back() == ':') {
                 labels[op.substr(0, op.size() - 1)] = pc;
                 pc++;
                 continue;
             }
+            
+            // Check if the instruction is a jump operation
             std::unordered_set<std::string> jumpOps = {"jmp", "jl", "je", "jle", "jz", "jg", "jge"};
             if (jumpOps.find(op) != jumpOps.end()) {
                 std::string labelName;
