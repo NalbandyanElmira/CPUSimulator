@@ -39,10 +39,13 @@ The input program should follow the format below:
 - `mov r1 5`       ; Move the value 5 into register r1
 - `mov r2 10`      ; Move the value 10 into register r2
 - `add r1 r2`      ; Add the values in r1 and r2 and store the result in r1
+- `print r1`       ; Print the value in r1
+- `dec r2`         ; Decrement value of r2 register
+- `print r2`       ; Print the value in r2
 - `label:`         ; Label definition
-- `sub r1 2`       ; Subtract 2 from r1
+- `dec r1`         ; Decrement value of r1 register
 - `cmp r1 r2`      ; Compare r1 and r2
-- `jl label`       ; Jump to the 'label' if r1 < r2
+- `jg label`       ; Jump to the 'label' if r1 > r2
 - `print r1`       ; Print the value in r1
 
 The program execution proceeds sequentially from one line to the next unless specific control flow instructions, such as `jl`, are encountered. These control flow instructions can alter the program's flow by jumping to different parts of the code based on certain conditions.
